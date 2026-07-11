@@ -1,0 +1,158 @@
+import type { Edition } from "./types";
+
+export const edition001: Edition = {
+  slug: "edition-001",
+  number: 1,
+  numberLabel: "001",
+  month: "May",
+  year: 2026,
+  date: "May 2026",
+  headline: "The Map Is Marked",
+  strapline: "Vision 2040 | Expanding the Reach of RHEMA",
+  theme: "The Audacity to Begin",
+  cover: "/covers/edition-001.png",
+  coverPerson: "Rev. Tokunbo Adejuwon",
+  summary:
+    "Welcome to the beginning. The National Director unveils the spiritual burden behind Vision 2040, why now is the time, and the mandate to take the Word everywhere.",
+  intro: [
+    "Every action begins with a first step. Each expansion starts with a decision. A legacy begins when someone says, \u201CWe cannot remain here.\u201D",
+    "Rhema Bible Training Centre Nigeria is not limited to a specific city, campus, or country. Our mission has always been to go and teach God\u2019s people faith, equipping skilled labourers for the end-time global harvest, and raising Spirit-led, Bible-based leaders.",
+    "PIONEER is more than just a newsletter. This digital publication provides insight into Vision 2040 \u2014 including the vision, strategy, people, and locations for new Rhema campuses across Nigeria and West Africa.",
+  ],
+  sections: [
+    {
+      slug: "visionnaires-desk",
+      kind: "visionnaire",
+      label: "From the Visionnaire\u2019s Desk",
+      title: "A Conversation with the National Director",
+      subtitle:
+        "Vision 2040 did not arrive as a strategy document. It came as a burden \u2014 a growing conviction that access to solid Bible training must increase if the harvest is to be preserved.",
+      author: "Rev. Tokunbo Adejuwon",
+      authorRole: "National Director, Rhema Bible Training Centre Nigeria",
+      authorImage: "/people/tokunbo-adejuwon.jpg",
+      image: "/people/tokunbo-adejuwon.jpg",
+      pullQuotes: [
+        "We are not trying to use people to build Rhema. We are using Rhema to build people.",
+        "If not now, then when?",
+      ],
+      blocks: [
+        {
+          type: "qa",
+          q: "Vision 2040 is a massive undertaking. What is the core spiritual burden that birthed this mandate?",
+          a: [
+            "Before Brother Hagin was born, about two or three days before his birth, Jesus appeared to his mother and said to her, \u201CFear not, the baby shall be born; just as John the Baptist was a forerunner of His first coming, he would be a forerunner of His second coming.\u201D That was the purpose for Brother Hagin\u2019s life and ministry \u2014 to help usher in Jesus\u2019 return.",
+            "Now, we know from the Bible, from James 5:7\u20138, that the husbandman is waiting for the precious fruit of the earth. We know from Matthew 24:14 that \u201Cthis gospel of the kingdom shall be preached as a witness unto all nations, and then shall the end come.\u201D We also know from Revelation 5:9\u201310 that every people group will hear the gospel. That immediately tells us that our assignment includes getting the Word of God to every place \u2014 to the unreached, the unchurched, the unreached people groups. Getting it everywhere.",
+            "In May 1950, Brother Hagin had an audible voice from heaven. The Lord Jesus told him: \u201CI want you to go teach my people faith. I\u2019ve taught you faith through my Word. I permitted you to go through certain experiences. You\u2019ve learned faith through my Word and through experience. I want you to go teach my people what I\u2019ve taught you.\u201D",
+            "What was the target audience God gave him? \u201CMy people.\u201D Anywhere God\u2019s people are, we are sent there. What is our target audience? The Body of Christ.",
+            "Then in December 1962 and January 1963, in two visions, the Lord specifically told him: \u201CI want you to minister to the whole body.\u201D This is an offshoot of our assignment. If we are to reach the whole Body of Christ, and if a soul is a soul, then there are people somewhere who have not heard that there is a Saviour.",
+            "Part of our assignment is to reach everybody. Yes, we may not go everywhere personally, but we can train people who will go. That is what Rhema Bible Training Centre does. We train people.",
+            "Rhema Nigeria started in 2010. By 2025 \u2014 that is 15 years \u2014 we had nine campuses. If we had nine campuses in 15 years, we cannot continue at that rate. We currently have an enrolment of over 11,000 in a nation of about 250 million people. Continuing the same way will not work. We have to be strategic about expansion, about reaching more people, spreading the message, and multiplying ourselves. That is where this came from.",
+          ],
+        },
+        {
+          type: "qa",
+          q: "Why is \u201Cnow\u201D the time to push into new territories?",
+          a: [
+            "As Jesus\u2019 coming draws nearer, the urgency of the hour becomes more intense. The truth is, the rapture can take place in our lifetime. It is the generation that brings closure to the Great Commission that will witness the rapture. The question is: What can we do to take this message out?",
+            "We believe we have a strong advantage in Nigeria. Kenneth Hagin\u2019s books came into Nigeria in the 70s and 80s. I don\u2019t think there is any country in Africa where Kenneth Hagin is as known and as honoured as he is in Nigeria. We are tremendously advantaged. The question then becomes: How do we take advantage of our advantage? That is why there is urgency.",
+            "As Esther 4:14 says, we have come into the kingdom for such a time as this. If not now, then when? We are the ones who teach that now faith is, and we know that God will do for us as much as we believe Him for.",
+            "We have a quickening in our spirit that this is the time. This is now. These are the people. We have trained people. We have gained traction, acceptability and respectability. People have come to see that we have integrity. We are here for the long haul.",
+            "We are not trying to use people to build Rhema. We are using Rhema to build people \u2014 to reach people and raise ministers. We have many graduates with the call of God burning in their hearts. This gives them focus. It rallies the troops around a common vision \u2014 not centred on ourselves, but centred on reaching the Body of Christ and reaching the lost.",
+          ],
+        },
+      ],
+    },
+    {
+      slug: "country-focus-cameroon",
+      kind: "country",
+      label: "Country Focus",
+      title: "Republic of Cameroon",
+      subtitle: "To win a nation, you must first know its story.",
+      image: "/img/focus-cameroon.png",
+      focus: {
+        name: "Republic of Cameroon",
+        kind: "country",
+        tagline: "\u201CAfrica in Miniature\u201D \u2014 a multi-hub harvest field.",
+        image: "/img/focus-cameroon.png",
+      },
+      blocks: [
+        {
+          type: "statgroup",
+          stats: [
+            { label: "Population Size", value: "30.6 Million", insight: "A significant harvest field requiring a multi-hub approach to ensure total coverage." },
+            { label: "Dominant Religions", value: "Christianity 70.7% \u00B7 Islam 24.4% \u00B7 Animism 2.2%", insight: "While nominally Christian, syncretism \u2014 mixing faith with traditional occultism \u2014 is a major challenge for the true Gospel." },
+            { label: "Christian Expression", value: "Catholic 38% \u00B7 Protestant/Pentecostal 32%", insight: "A strong Catholic heritage exists, but there is a massive hunger for the charismatic and teaching ministry in urban centres." },
+            { label: "Literacy Rate", value: "77.1%", insight: "A highly literate population means a high capacity for deep Bible training and leadership development through literature." },
+            { label: "Primary Languages", value: "French & English (official)", insight: "Being bilingual is a strategic advantage \u2014 it lets pioneers bridge the gap between Anglophone and Francophone Africa." },
+            { label: "Youth Population", value: "~63% under 25", insight: "More than 19 million people are in their early years. Cameroon\u2019s youth are at the forefront of the fight for its future." },
+            { label: "Urban vs Rural", value: "58% Urban \u00B7 42% Rural", insight: "Rapid urbanisation in Douala and Yaound\u00E9 provides a concentration of people for rapid campus planting." },
+            { label: "Bible Schools", value: "Moderate, mostly urban", insight: "Most training centres are localised in cities. There is a training desert in the northern and eastern border regions." },
+          ],
+        },
+        {
+          type: "callout",
+          tone: "gold",
+          label: "Did You Know?",
+          text: "Cameroon is known as \u201CAfrica in Miniature\u201D because it encompasses the continent\u2019s major climates and landscapes. If you can pioneer here, you can do it anywhere.",
+        },
+        {
+          type: "callout",
+          tone: "navy",
+          label: "The 10/40 Window",
+          text: "While Africa has a high Christian population, the quality of training remains the greatest gap. In many parts of West and Central Africa, there is only one trained pastor for every 10,000 believers. We are not just planting churches \u2014 we are fixing the leadership deficit.",
+        },
+      ],
+    },
+    {
+      slug: "state-focus-katsina",
+      kind: "state",
+      label: "State Focus",
+      title: "Katsina State",
+      subtitle: "English is for the office; Hausa is for the soul.",
+      image: "/img/focus-katsina.png",
+      focus: {
+        name: "Katsina State",
+        kind: "state",
+        tagline: "A dense northern harvest that must be won in the heart language.",
+        image: "/img/focus-katsina.png",
+      },
+      blocks: [
+        {
+          type: "statgroup",
+          stats: [
+            { label: "Population Size", value: "9.3 Million", insight: "A massive, dense population concentrated in key commerce hubs. The harvest is vast." },
+            { label: "Dominant Religion", value: "Islam (predominant)", insight: "A deeply religious environment. The approach must be rooted in honour, wisdom and power \u2014 rather than argument." },
+            { label: "Christian Expression", value: "Minority, mainly urban", insight: "Most Christians are concentrated in the Sabon Gari areas. There is a strategic need for embedded believers who model the Word in the marketplace." },
+            { label: "Literacy Rate", value: "45% \u2013 50%", insight: "Oral storytelling, audio teaching and Hausa-translated materials are more effective here than English textbooks." },
+            { label: "Primary Languages", value: "Hausa & Fulfulde (Fulani)", insight: "To win Katsina, you must speak the language of the heart. English is for the office; Hausa is for the soul." },
+          ],
+        },
+      ],
+    },
+    {
+      slug: "biblical-og-paul",
+      kind: "biblical",
+      label: "The Biblical OG of Pioneering",
+      title: "Paul the Trainer",
+      subtitle: "He did not only preach. He trained.",
+      pullQuotes: [
+        "I have become all things to all people so that by all possible means I might save some. \u2014 1 Corinthians 9:22",
+      ],
+      blocks: [
+        { type: "p", text: "Paul did not only preach. He trained. From city to city, he taught doctrine, corrected error, raised leaders, and then moved on \u2014 trusting the Word he had deposited." },
+        { type: "h", text: "The King of the Side-Hustle: Tentmaking" },
+        { type: "p", text: "Paul is the reason we use the term \u201Ctentmaking\u201D today. He was a highly educated, top-tier intellectual who was not afraid to get leather dust under his fingernails." },
+        { type: "image", src: "/img/paul-tentmaking_1783754697309.png", caption: "Paul the tentmaker \u2014 an educated intellectual who funded the mission with the work of his own hands." },
+        { type: "h", text: "The Remote Work Pioneer" },
+        { type: "p", text: "Paul literally ran the first global network through letters. When he could not be there physically \u2014 usually because he was in prison, another office he mastered \u2014 he wrote." },
+        { type: "callout", tone: "navy", label: "Pioneer Lesson", text: "Influence is not limited by geography. Whether it is a letter from 60 AD or a Zoom call or PDF manual from May 2026, the teaching is what sustains the work \u2014 not just the leader\u2019s personality." },
+        { type: "h", text: "The Cultural Chameleon" },
+        { type: "p", text: "In Athens, he quoted their poets. In Jerusalem, he spoke Hebrew. To the Romans, he pulled out his citizenship card." },
+        { type: "image", src: "/img/paul-areopagus_1783754697309.png", caption: "Paul at the Areopagus in Athens \u2014 translating the Gospel into the language and thought of his audience." },
+        { type: "callout", tone: "navy", label: "Pioneer Lesson", text: "Paul taught us that to win a territory, you have to translate the Gospel into the local gist \u2014 without watering down the power." },
+        { type: "callout", tone: "gold", label: "Myth vs Fact", title: "The Super-Apostle Paul", text: "Myth: Paul was a lonely Lone Ranger who did everything himself. Fact: Paul had one of the biggest CC lists in history. He travelled with Silas, Timothy, Luke and Priscilla. He was a team builder. If you look at the end of his letters, such as Romans 16, it feels like a modern-day email thread in which he copies everyone involved in the mission. Vision 2040 is not looking for a one-man army. We are looking for the Body of Christ." },
+        { type: "p", text: "For our pioneers, that might mean becoming a French student in Douala, a tech mentor in Yaound\u00E9, or an explorer in a village square. Paul\u2019s life proves that the audacity to begin is fuelled by the willingness to adapt." },
+      ],
+    },
+  ],
+};

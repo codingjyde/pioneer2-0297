@@ -1,0 +1,102 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme {
+  --color-paper: #FBFAF6;
+  --color-paper-2: #F3F0E9;
+  --color-ink: #0C2340;
+  --color-navy: #00205B;
+  --color-navy-2: #06183F;
+  --color-red: #C8102E;
+  --color-red-ink: #A50D26;
+  --color-blue: #003DA5;
+  --color-gold: #F1C400;
+  --color-burgundy: #76232F;
+  --color-muted: #5B6472;
+  --color-line: rgba(12, 35, 64, 0.12);
+
+  --font-display: "EB Garamond", ui-serif, Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --paper: #FBFAF6;
+  --ink: #0C2340;
+  --navy: #00205B;
+  --red: #C8102E;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-line);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  ::selection {
+    background: var(--color-red);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* small uppercase tracked label */
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .prose-body p {
+    line-height: 1.78;
+    font-size: 1.15rem;
+    color: #1c2c46;
+    margin-bottom: 1.4rem;
+  }
+  .prose-body p:first-letter {
+  }
+  .link-underline {
+    background-image: linear-gradient(var(--color-red), var(--color-red));
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.3s ease;
+  }
+  .link-underline:hover {
+    background-size: 100% 2px;
+  }
+}
+
+/* thin scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--color-paper-2); }
+::-webkit-scrollbar-thumb { background: #c9c2b4; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #b3ab9b; }
+
+/* fade/rise reveal used with IntersectionObserver or on mount */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  animation: rise-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.paper-grain {
+  background-image: radial-gradient(rgba(12,35,64,0.025) 1px, transparent 1px);
+  background-size: 4px 4px;
+}

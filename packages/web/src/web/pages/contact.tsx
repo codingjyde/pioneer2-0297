@@ -140,9 +140,10 @@ function RecommendForm() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const recommenderName = String(fd.get("recommenderName") || "").trim();
+    const email = String(fd.get("email") || "").trim();
     const cityName = String(fd.get("cityName") || "").trim();
-    if (!recommenderName || !cityName) {
-      setErr("Please provide your name and the city you're recommending.");
+    if (!recommenderName || !email.includes("@") || !cityName) {
+      setErr("Please provide your name, a valid email, and the city you're recommending.");
       setState("error");
       return;
     }
@@ -151,7 +152,7 @@ function RecommendForm() {
       const res = await api["recommend-city"].$post({
         json: {
           recommenderName,
-          email: String(fd.get("email") || ""),
+          email,
           cityName,
           country: String(fd.get("country") || ""),
           state: String(fd.get("state") || ""),
@@ -178,7 +179,7 @@ function RecommendForm() {
       </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Your name" required><Input name="recommenderName" placeholder="Your name" /></Field>
-        <Field label="Email"><Input name="email" type="email" placeholder="your@email.com" /></Field>
+        <Field label="Email" required><Input name="email" type="email" placeholder="your@email.com" /></Field>
         <Field label="City / town" required><Input name="cityName" placeholder="e.g. Dakar" /></Field>
         <Field label="Country"><Input name="country" placeholder="e.g. Senegal" /></Field>
         <Field label="State / region"><Input name="state" placeholder="e.g. Bauchi" /></Field>

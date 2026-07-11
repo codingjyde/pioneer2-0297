@@ -205,7 +205,7 @@ export function Footer() {
               {SITE.tagline}. Charting the vision, strategy, people, and locations for new Rhema campuses across
               Nigeria and West Africa.
             </p>
-            <div className="mt-6">
+            <div className="mt-6 hidden">
               <p className="eyebrow mb-3 text-gold">Get every edition</p>
               <SubscribeForm />
             </div>

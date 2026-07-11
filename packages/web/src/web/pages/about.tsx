@@ -33,6 +33,24 @@ const TIMELINE = [
   { year: "2040", title: "The Horizon", text: "New Rhema campuses planted across Nigeria and West Africa, preserving the end-time harvest." },
 ];
 
+const GOALS = [
+  "10% of Nigeria's population will be a part of the RHEMA family.",
+  "Establish 40 campuses across Nigeria and four campuses in Lagos, with every state in Nigeria and the FCT having at least one RHEMA Nigeria campus.",
+  "Effectively train 100,000 leaders who touch every sphere of society, including church, media, government, and business.",
+  "10% of graduates, working with their pastors or denominations, will pioneer 10,000 life-giving churches, mostly in unreached areas in Nigeria and beyond, with 10 of Nigeria's largest and most influential churches pastored by graduates.",
+  "10% of graduates, working with their pastors or denominations, will become cross-cultural missionaries in the least reached areas of Nigeria and beyond, with Nigeria removed from the list of unreached people groups.",
+  "10% of graduates will become significantly influential societal leaders who bring critical change to the nation, resulting in measurable improvement in every area of society, with some becoming governors, senators, and house of representative members.",
+  "70% of graduates will fulfill vital supportive leadership roles, enabling those called to spiritual leadership and societal leadership to accomplish the vision God has called them to steward.",
+  "Print and distribute 10 million copies of Faith Library Publications books in Nigeria.",
+  "Translate 50 of Brother Hagin's and Pastor Hagin's books into Hausa, establish distribution networks throughout the North, then work on translations into other key language groups in the nation.",
+  "Have Rhema in tertiary institutions through Kainos, cooperating with campus fellowships to train 500,000 students on RBTC materials across Nigeria.",
+  "Air Rhema Nigeria TV and radio programs featuring Timeless Brother Hagin and Pastor Hagin programming, as well as excerpts from current and local Rhema Nigeria activities.",
+  "Build Rhema Kids and Youth Academies, cooperating with churches and secondary schools throughout Nigeria to train 500,000 children and youth on leadership with age-appropriate RBTC courses.",
+  "Provide a strong relational Alumni Association with a supportive, healthy structure that promotes care, communication, connection, and accountability.",
+  "Maintain a strong and healthy Ministerial Association (RMAI) for ordination and licensing of ministers that links with the major governing bodies in Nigeria, including CAN and PFN.",
+  "Build and/or acquire real estate properties in all states across the country.",
+];
+
 export default function About() {
   return (
     <Page>
@@ -66,6 +84,32 @@ export default function About() {
                   </div>
                   <h3 className="mt-5 font-display text-2xl text-navy">{p.title}</h3>
                   <p className="mt-3 leading-relaxed text-ink/70">{p.text}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Goals */}
+      <section className="bg-paper-2 py-20">
+        <Container>
+          <div className="max-w-3xl">
+            <Eyebrow>RHEMA Nigeria 15 Year Goals</Eyebrow>
+            <h2 className="mt-3 font-display text-4xl text-navy md:text-5xl">What Vision 2040 is building toward</h2>
+            <p className="mt-4 text-lg leading-relaxed text-ink/70">
+              These goals give shape to the burden: campuses planted, leaders trained, churches pioneered, books
+              distributed, young people equipped, and structures built to carry the work for decades.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {GOALS.map((goal, i) => (
+              <Reveal key={goal} delay={(i % 6) * 45}>
+                <div className="flex h-full gap-4 rounded-2xl border border-line bg-white p-5 shadow-[0_22px_50px_-44px_rgba(12,35,64,0.45)]">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gold/25 font-display text-lg text-navy">
+                    {String(i + 1).padStart(2, "0")}
+                  </div>
+                  <p className="text-sm leading-relaxed text-ink/75">{goal}</p>
                 </div>
               </Reveal>
             ))}

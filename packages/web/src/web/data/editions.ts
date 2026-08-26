@@ -2,8 +2,9 @@ import type { Block, Edition, FocusLocation, Section } from "./types";
 import { edition001 } from "./edition-001";
 import { edition002 } from "./edition-002";
 import { edition003 } from "./edition-003";
+import { edition004 } from "./edition-004";
 
-export const editions: Edition[] = [edition003, edition002, edition001];
+export const editions: Edition[] = [edition004, edition003, edition002, edition001];
 
 export function getEdition(slug: string): Edition | undefined {
   return editions.find((e) => e.slug === slug);

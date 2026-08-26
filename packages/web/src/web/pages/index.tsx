@@ -83,7 +83,7 @@ export default function Home() {
           {[
             { v: "2040", l: "The vision horizon" },
             { v: "300+", l: "Rhema campuses worldwide" },
-            { v: "3", l: "Editions published" },
+            { v: String(editions.length), l: "Editions published" },
             { v: "West Africa", l: "The frontier field" },
           ].map((s, i) => (
             <Reveal key={i} delay={i * 60} className="text-center md:text-left">

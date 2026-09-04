@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { checkSpam } from "./anti-spam";
 import { db } from "./database";
 import {
   cityRecommendations,
@@ -15,7 +16,12 @@ const app = new Hono()
   .get("/ping", (c) => c.json({ message: `Pong! ${Date.now()}` }, 200))
   .get("/health", (c) => c.json({ status: "ok" }, 200))
   .post("/subscribe", async (c) => {
-    const body = await c.req.json<{ email?: string }>().catch(() => ({}) as { email?: string });
+    const body = await c
+      .req.json<{ email?: string; company?: string; startedAt?: number }>()
+      .catch(() => ({}) as { email?: string; company?: string; startedAt?: number });
+    const spam = checkSpam(body);
+    if (spam.kind === "drop") return c.json({ ok: true }, 200);
+    if (spam.kind === "reject") return c.json({ error: spam.error }, 400);
     const email = (body.email ?? "").trim();
     if (!email || !email.includes("@")) {
       return c.json({ error: "A valid email is required." }, 400);
@@ -33,7 +39,12 @@ const app = new Hono()
       rhemaGraduate?: boolean;
       targetRegion?: string;
       message?: string;
+      company?: string;
+      startedAt?: number;
     }>().catch(() => ({}));
+    const spam = checkSpam(body);
+    if (spam.kind === "drop") return c.json({ ok: true }, 200);
+    if (spam.kind === "reject") return c.json({ error: spam.error }, 400);
     const fullName = (body.fullName ?? "").trim();
     const email = (body.email ?? "").trim();
     const role = (body.role ?? "").trim();
@@ -63,7 +74,12 @@ const app = new Hono()
       partnershipType?: string;
       amount?: string;
       message?: string;
+      company?: string;
+      startedAt?: number;
     }>().catch(() => ({}));
+    const spam = checkSpam(body);
+    if (spam.kind === "drop") return c.json({ ok: true }, 200);
+    if (spam.kind === "reject") return c.json({ error: spam.error }, 400);
     const fullName = (body.fullName ?? "").trim();
     const email = (body.email ?? "").trim();
     const partnershipType = (body.partnershipType ?? "").trim();
@@ -89,7 +105,12 @@ const app = new Hono()
       email?: string;
       subject?: string;
       message?: string;
+      company?: string;
+      startedAt?: number;
     }>().catch(() => ({}));
+    const spam = checkSpam(body);
+    if (spam.kind === "drop") return c.json({ ok: true }, 200);
+    if (spam.kind === "reject") return c.json({ error: spam.error }, 400);
     const fullName = (body.fullName ?? "").trim();
     const email = (body.email ?? "").trim();
     const message = (body.message ?? "").trim();
@@ -116,7 +137,12 @@ const app = new Hono()
       state?: string;
       reason?: string;
       contactPerson?: string;
+      company?: string;
+      startedAt?: number;
     }>().catch(() => ({}));
+    const spam = checkSpam(body);
+    if (spam.kind === "drop") return c.json({ ok: true }, 200);
+    if (spam.kind === "reject") return c.json({ error: spam.error }, 400);
     const recommenderName = (body.recommenderName ?? "").trim();
     const cityName = (body.cityName ?? "").trim();
     if (!recommenderName || !cityName) {

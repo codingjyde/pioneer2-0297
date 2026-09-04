@@ -1,4 +1,5 @@
 import type { Config, Context } from "@netlify/functions";
+import { checkSpam } from "./_shared/anti-spam";
 import { clean, corsResponse, json, sendFormEmails } from "./_shared/forms";
 
 type RecommendCityPayload = {
@@ -9,6 +10,8 @@ type RecommendCityPayload = {
   state?: string;
   reason?: string;
   contactPerson?: string;
+  company?: string;
+  startedAt?: number;
 };
 
 export default async (req: Request, _context: Context) => {
@@ -16,6 +19,10 @@ export default async (req: Request, _context: Context) => {
   if (req.method !== "POST") return json({ error: "Method not allowed." }, 405);
 
   const body = await req.json().catch(() => ({} as RecommendCityPayload));
+  const spam = checkSpam(body);
+  if (spam.kind === "drop") return json({ ok: true }, 200);
+  if (spam.kind === "reject") return json({ error: spam.error }, 400);
+
   const recommenderName = clean(body.recommenderName);
   const email = clean(body.email);
   const cityName = clean(body.cityName);

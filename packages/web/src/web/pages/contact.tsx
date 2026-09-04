@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link2, Mail, MapPin, Phone } from "lucide-react";
 import { Page } from "../components/layout";
 import { ActionButton, Container, Eyebrow, Reveal } from "../components/ui-kit";
-import { Field, FormSuccess, Input, Textarea } from "../components/form-kit";
+import { AntiSpamFields, Field, FormSuccess, Input, Textarea } from "../components/form-kit";
 import { api } from "@/lib/api";
 import { SITE, SOCIALS } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -102,7 +102,14 @@ function ContactForm() {
     setState("loading");
     try {
       const res = await api.contact.$post({
-        json: { fullName, email, subject: String(fd.get("subject") || ""), message },
+        json: {
+          fullName,
+          email,
+          subject: String(fd.get("subject") || ""),
+          message,
+          company: String(fd.get("company") || ""),
+          startedAt: Number(fd.get("startedAt")) || 0,
+        },
       });
       if (!res.ok) throw new Error();
       setState("done");
@@ -118,6 +125,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={submit} className="space-y-5 rounded-2xl border border-line bg-white p-6 md:p-8">
+      <AntiSpamFields />
       <div className="grid gap-5 sm:grid-cols-2">
         <Field label="Full name" required><Input name="fullName" placeholder="Your name" /></Field>
         <Field label="Email" required><Input name="email" type="email" placeholder="your@email.com" /></Field>
@@ -158,6 +166,8 @@ function RecommendForm() {
           state: String(fd.get("state") || ""),
           reason: String(fd.get("reason") || ""),
           contactPerson: String(fd.get("contactPerson") || ""),
+          company: String(fd.get("company") || ""),
+          startedAt: Number(fd.get("startedAt")) || 0,
         },
       });
       if (!res.ok) throw new Error();
@@ -174,6 +184,7 @@ function RecommendForm() {
 
   return (
     <form onSubmit={submit} className="space-y-5 rounded-2xl border border-line bg-white p-6 md:p-8">
+      <AntiSpamFields />
       <div className="flex items-center gap-2 text-sm text-muted">
         <MapPin className="size-4 text-red" /> Help us map the frontier
       </div>

@@ -15,6 +15,7 @@ import {
 import { NAV, SITE, SOCIALS } from "@/lib/site";
 import { api } from "@/lib/api";
 import { ActionButton, Container, LinkButton } from "./ui-kit";
+import { AntiSpamFields } from "./form-kit";
 import { cn } from "@/lib/utils";
 
 const SOCIAL_ICONS = {
@@ -159,7 +160,10 @@ function SubscribeForm() {
     }
     setState("loading");
     try {
-      const res = await api.subscribe.$post({ json: { email } });
+      const fd = new FormData(e.currentTarget);
+      const res = await api.subscribe.$post({
+        json: { email, company: String(fd.get("company") || ""), startedAt: Number(fd.get("startedAt")) || 0 },
+      });
       if (!res.ok) throw new Error();
       setState("done");
       setMsg("You're on the list. Watch your inbox.");
@@ -172,6 +176,7 @@ function SubscribeForm() {
 
   return (
     <form onSubmit={submit} className="w-full">
+      <AntiSpamFields />
       <div className="flex flex-col gap-3 sm:flex-row">
         <input
           type="email"

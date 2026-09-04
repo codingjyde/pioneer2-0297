@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Page } from "../components/layout";
 import { Container, Eyebrow, Reveal } from "../components/ui-kit";
-import { Field, FormSuccess, Input, OptionCards, Select, Textarea } from "../components/form-kit";
+import { AntiSpamFields, Field, FormSuccess, Input, OptionCards, Select, Textarea } from "../components/form-kit";
 import { ActionButton } from "../components/ui-kit";
 import { api } from "@/lib/api";
 
@@ -46,6 +46,8 @@ export default function Pioneer() {
           rhemaGraduate: fd.get("rhemaGraduate") === "on",
           targetRegion: String(fd.get("targetRegion") || ""),
           message: String(fd.get("message") || ""),
+          company: String(fd.get("company") || ""),
+          startedAt: Number(fd.get("startedAt")) || 0,
         },
       });
       if (!res.ok) throw new Error();
@@ -82,6 +84,7 @@ export default function Pioneer() {
           ) : (
             <Reveal>
               <form onSubmit={submit} className="space-y-6">
+                <AntiSpamFields />
                 <div>
                   <Eyebrow>How will you build?</Eyebrow>
                   <div className="mt-4">

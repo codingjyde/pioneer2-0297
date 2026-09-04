@@ -2,7 +2,7 @@ import * as React from "react";
 import { HandHeart, HeartHandshake, Church, Repeat } from "lucide-react";
 import { Page } from "../components/layout";
 import { ActionButton, Container, Eyebrow, Reveal } from "../components/ui-kit";
-import { Field, FormSuccess, Input, OptionCards, Textarea } from "../components/form-kit";
+import { AntiSpamFields, Field, FormSuccess, Input, OptionCards, Textarea } from "../components/form-kit";
 import { api } from "@/lib/api";
 
 type PType = "monthly" | "one-off" | "prayer" | "church";
@@ -51,6 +51,8 @@ export default function Partner() {
           partnershipType: ptype,
           amount: String(fd.get("amount") || ""),
           message: String(fd.get("message") || ""),
+          company: String(fd.get("company") || ""),
+          startedAt: Number(fd.get("startedAt")) || 0,
         },
       });
       if (!res.ok) throw new Error();
@@ -104,6 +106,7 @@ export default function Partner() {
               />
             ) : (
               <form onSubmit={submit} className="space-y-6">
+                <AntiSpamFields />
                 <div>
                   <Eyebrow>How would you like to partner?</Eyebrow>
                   <div className="mt-4">

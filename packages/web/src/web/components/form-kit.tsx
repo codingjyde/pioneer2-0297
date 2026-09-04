@@ -1,6 +1,29 @@
 import * as React from "react";
 import { CheckCircle2 } from "lucide-react";
+import { HONEYPOT_FIELD } from "../../api/anti-spam";
 import { cn } from "@/lib/utils";
+
+/**
+ * Hidden anti-bot fields rendered inside every form:
+ *  - `startedAt`  epoch ms captured on mount (time trap)
+ *  - honeypot     visible to bots in the DOM, hidden from humans
+ *
+ * Read them back with FormData and include them in the API payload.
+ * Server side: checkSpam() in netlify/functions/_shared/anti-spam.ts
+ * (and the mirrored packages/web/src/api/anti-spam.ts).
+ */
+export function AntiSpamFields() {
+  const [startedAt] = React.useState(() => Date.now());
+  return (
+    <>
+      <input type="hidden" name="startedAt" value={startedAt} />
+      <div className="hidden" aria-hidden="true">
+        <label>Leave this field empty</label>
+        <input type="text" tabIndex={-1} autoComplete="off" name={HONEYPOT_FIELD} />
+      </div>
+    </>
+  );
+}
 
 const fieldBase =
   "h-11 w-full rounded-xl border border-line bg-white px-4 text-[0.95rem] text-ink outline-none transition placeholder:text-muted/60 focus:border-navy/50 focus:ring-2 focus:ring-navy/10";

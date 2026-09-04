@@ -1,4 +1,5 @@
 import type { Config, Context } from "@netlify/functions";
+import { checkSpam } from "./_shared/anti-spam";
 import { clean, corsResponse, json, sendFormEmails } from "./_shared/forms";
 
 type ContactPayload = {
@@ -6,6 +7,8 @@ type ContactPayload = {
   email?: string;
   subject?: string;
   message?: string;
+  company?: string;
+  startedAt?: number;
 };
 
 export default async (req: Request, _context: Context) => {
@@ -13,6 +16,10 @@ export default async (req: Request, _context: Context) => {
   if (req.method !== "POST") return json({ error: "Method not allowed." }, 405);
 
   const body = await req.json().catch(() => ({} as ContactPayload));
+  const spam = checkSpam(body);
+  if (spam.kind === "drop") return json({ ok: true }, 200);
+  if (spam.kind === "reject") return json({ error: spam.error }, 400);
+
   const fullName = clean(body.fullName);
   const email = clean(body.email);
   const message = clean(body.message);

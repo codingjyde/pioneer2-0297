@@ -6,7 +6,9 @@
     ".": "./src/api/index.ts"
   },
   "scripts": {
-    "build": "tsc --noEmit && vite build",
+    "build": "bun run pdf && tsc --noEmit && vite build",
+    "pdf": "bun run tools/gen-pdf.ts",
+    "pdf:force": "bun run tools/gen-pdf.ts --force",
     "dev": "vite",
     "start": "bun src/server.ts",
     "typecheck": "tsc --noEmit",

@@ -70,6 +70,8 @@ function QA({ q, a }: { q: string; a: string[] }) {
 
 export function BlockView({ block }: { block: Block }) {
   switch (block.type) {
+    case "link":
+      return <p className="mb-6"><a href={block.href} className="font-semibold text-red underline underline-offset-4">{block.text}</a></p>;
     case "p":
       return <p className="mb-6 text-[1.15rem] leading-[1.78] text-[#1c2c46]">{block.text}</p>;
     case "h":

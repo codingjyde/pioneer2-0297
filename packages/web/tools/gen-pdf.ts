@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { editions } from "../src/web/data/editions";
 import type { Block, Section } from "../src/web/data/types";
 
@@ -13,6 +13,14 @@ const esc = (s: string) =>
 
 function blockHtml(b: Block): string {
   switch (b.type) {
+    case "link":
+      return `<p><a href="${esc(b.href).replace(/"/g, "&quot;")}">${esc(b.text)}</a></p>`;
+    case "image": {
+      const path = new URL(`../public${b.src}`, import.meta.url);
+      const ext = b.src.toLowerCase().endsWith(".png") ? "png" : "jpeg";
+      const data = readFileSync(path).toString("base64");
+      return `<figure><img src="data:image/${ext};base64,${data}" style="max-width:100%;max-height:150mm;object-fit:contain">${b.caption ? `<figcaption>${esc(b.caption)}</figcaption>` : ""}</figure>`;
+    }
     case "p":
       return `<p>${esc(b.text)}</p>`;
     case "h":
@@ -53,6 +61,7 @@ function sectionHtml(s: Section): string {
     ${s.subtitle ? `<p class="subtitle">${esc(s.subtitle)}</p>` : ""}
     ${s.author ? `<p class="byline">${esc(s.author)}${s.authorRole ? ` — ${esc(s.authorRole)}` : ""}</p>` : ""}
     ${s.intro ? `<p class="intro">${esc(s.intro)}</p>` : ""}
+    ${(s.gallery ?? []).map((image) => blockHtml({ type: "image", ...image })).join("")}
     ${s.blocks.map(blockHtml).join("")}
     ${quotes}
   </section>`;
@@ -74,6 +83,9 @@ function docHtml(e: (typeof editions)[number]): string {
   h2 { font-size: 22pt; color:#00205B; margin: 0 0 3mm; line-height:1.1; }
   h3 { font-size: 13pt; color:#00205B; margin: 6mm 0 2mm; }
   .sec { page-break-inside: auto; margin-bottom: 12mm; }
+  .sec + .sec { break-before: page; }
+  h2, h3, .qa .q { break-after: avoid; }
+  blockquote { break-inside: avoid; }
   .label { font-family: Arial, sans-serif; text-transform: uppercase; letter-spacing:.18em; font-size:9pt; font-weight:700; color:#C8102E; margin-bottom: 2mm; }
   .subtitle { font-size: 13pt; color:#3a4a63; font-style: italic; margin: 0 0 3mm; }
   .byline { font-family: Arial, sans-serif; font-size:10pt; color:#5B6472; margin: 0 0 4mm; }

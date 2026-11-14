@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useParams } from "wouter";
 import { ArrowLeft, ArrowRight, Clock, MapPin } from "lucide-react";
 import { Page, ShareRow } from "../components/layout";
@@ -22,10 +23,12 @@ export default function Article() {
   const idx = edition.sections.findIndex((s) => s.slug === sectionSlug);
   if (idx === -1) return <NotFound />;
   const section = edition.sections[idx];
+  const [galleryIndex, setGalleryIndex] = useState(0);
   const prev = edition.sections[idx - 1];
   const next = edition.sections[idx + 1];
   const accent = KIND_ACCENT[section.kind] ?? "text-red";
   const heroImage = section.image ?? section.focus?.image;
+  const showHeaderMap = edition.slug === "edition-006" && ["state-focus-kwara", "country-focus-gambia"].includes(section.slug);
 
   return (
     <Page>
@@ -38,9 +41,16 @@ export default function Article() {
           >
             <ArrowLeft className="size-4" /> Edition {edition.numberLabel} · {edition.month} {edition.year}
           </Link>
-          <div className={`eyebrow mt-6 ${accent}`}>{section.label}</div>
-          <h1 className="mt-3 font-display text-4xl leading-[1.02] text-navy md:text-5xl">{section.title}</h1>
-          {section.subtitle && <p className="mt-4 text-lg leading-relaxed text-ink/70">{section.subtitle}</p>}
+          <div className={showHeaderMap ? "mt-6 grid items-center gap-6 md:grid-cols-[1fr_256px]" : ""}>
+            <div>
+              <div className={`eyebrow ${showHeaderMap ? "" : "mt-6"} ${accent}`}>{section.label}</div>
+              <h1 className="mt-3 font-display text-4xl leading-[1.02] text-navy md:text-5xl">{section.title}</h1>
+              {section.subtitle && <p className="mt-4 text-lg leading-relaxed text-ink/70">{section.subtitle}</p>}
+            </div>
+            {showHeaderMap && section.focus?.image && (
+              <img src={section.focus.image} alt={`Map showing ${section.focus.name}`} className="size-64 justify-self-end rounded-xl border border-line bg-white object-contain p-2" />
+            )}
+          </div>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
             {section.author && (
@@ -97,7 +107,7 @@ export default function Article() {
       )}
 
       {/* Focus feature image */}
-      {section.kind !== "visionnaire" && heroImage && (
+      {section.kind !== "visionnaire" && heroImage && !showHeaderMap && (
         <section className="pt-12">
           <Container className="max-w-4xl">
             <Reveal>
@@ -124,6 +134,19 @@ export default function Article() {
             <p className="mb-8 border-l-2 border-gold pl-5 font-display text-2xl leading-snug text-navy">
               {section.intro}
             </p>
+          )}
+          {section.gallery && section.gallery.length > 0 && (
+            <div className="mb-10 overflow-hidden rounded-2xl border border-line bg-white">
+              <img src={section.gallery[galleryIndex].src} alt={section.gallery[galleryIndex].caption} className="aspect-[16/9] w-full bg-paper-2 object-contain" />
+              <div className="flex items-center justify-between gap-4 px-4 py-3">
+                <button type="button" aria-label="Previous image" onClick={() => setGalleryIndex((galleryIndex + section.gallery!.length - 1) % section.gallery!.length)} className="rounded-full border border-line p-2 text-navy hover:bg-paper-2"><ArrowLeft className="size-4" /></button>
+                <div className="text-center">
+                  <p className="text-sm text-ink/75">{section.gallery[galleryIndex].caption}</p>
+                  <p className="mt-1 text-xs text-muted">{galleryIndex + 1} / {section.gallery.length}</p>
+                </div>
+                <button type="button" aria-label="Next image" onClick={() => setGalleryIndex((galleryIndex + 1) % section.gallery!.length)} className="rounded-full border border-line p-2 text-navy hover:bg-paper-2"><ArrowRight className="size-4" /></button>
+              </div>
+            </div>
           )}
           <div className="prose-body">
             <Blocks blocks={section.blocks} />

@@ -1,4 +1,5 @@
 export type Block =
+  | { type: "link"; text: string; href: string }
   | { type: "p"; text: string }
   | { type: "h"; text: string }
   | { type: "quote"; text: string; cite?: string }
@@ -33,6 +34,7 @@ export interface Section {
   authorRole?: string;
   authorImage?: string;
   image?: string;
+  gallery?: { src: string; caption: string }[];
   intro?: string;
   blocks: Block[];
   pullQuotes?: string[];
